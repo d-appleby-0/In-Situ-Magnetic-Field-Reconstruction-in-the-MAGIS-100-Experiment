@@ -1,0 +1,23 @@
+z1 = 95.04
+z2 = -97.2 	# taken from edge effect minima on outer extremes of segment
+z3 = -43.2
+z4 = 36.72 	# edge effects maximized closest to coupler
+z5 = -2.16
+z6 = 2.16 	# coupler zone
+z7 = -70
+z8 = 70 	# approximate region where distance from external shield disruptions is greatest
+
+z_values = [z1, z2, z3, z4, z5, z6, z7, z8]
+
+measurement_radius = 6.5
+num_pts_on_rad = 12
+num_pts_on_arc = 20
+
+j = 65.75	# change for each simulation
+
+file = f"C:/Users/dappleby/Desktop/Results_Files_no_long_H/Polar_Method/Results_DefField_{j}Ain-2"
+z_counter = 0
+for z in z_values:
+	z_counter += 1
+	Analysis_Comi = f"POLAR  R2={measurement_radius} R3=R2 R1=0 R4=0 Z1={z} Z2=Z1 Z3=Z1, Z4=Z1 T1=0 T2=0 T3=360 T4=360 N1={num_pts_on_rad} N2={num_pts_on_arc} BUFFERNAME=Polar{j}_{z} \nTABLE INFILE=TEMP OUTFILE={file}.{z_counter} F1=X F2=Y F3=Z F4=Hx F5=Hy F6=Hz UNIT1T=LENGU UNIT2T=LENGU UNIT3T=LENGU UNIT4T=FIELU UNIT5T=FIELU UNIT6T=FIELU COLUMNS=6 BUFFERNAME=Polar{j}_{z} FORMAT=1 \n"
+	print(Analysis_Comi)	# print the Comi to perform each z-slice analysis

@@ -1,0 +1,14 @@
+import numpy as np
+
+j_base = 0.5	# base current densities (A/in^2) ### 66.039 is optimal value
+j_crit = 20	# important values fall below this threshold
+j_max = 142
+total_j_to_analyze = 20
+
+j_dense = int(round(total_j_to_analyze * 0.7))		# cluster of values beneath j_crit, change coeff if necessary
+
+j_low = np.geomspace(j_base, j_crit, num = j_dense)
+j_high = np.geomspace(j_crit, j_max, num = total_j_to_analyze - j_dense + 1)[1:]
+j_values = np.concatenate([[0], j_low, j_high])		# produce a logarithmically-spaced set of j values (closer to 0 is more critical)
+
+print(f"Comi for analysis over data set given by J = {j_values}")
